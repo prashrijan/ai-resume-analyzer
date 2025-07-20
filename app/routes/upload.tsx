@@ -15,7 +15,21 @@ const Upload = () => {
     const [status, setStatus] = useState<string | null>("");
     const [file, setFile] = useState<File | null>();
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {};
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const form = e.currentTarget.closest("form");
+
+        if (!form) return;
+
+        const formData = new FormData(form);
+
+        const companyName = formData.get("company-name");
+        const jobTitle = formData.get("job-title");
+        const jobDescription = formData.get("job-description");
+
+        console.log(companyName, jobTitle, jobDescription);
+    };
 
     const handleFileSelect = (file: File | null) => {
         setFile(file);
